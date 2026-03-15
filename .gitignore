@@ -6,4 +6,5 @@ target
 .moonagent/
 node_modules/
 dist/
+src/_ffi_generated.js
 package-lock.json

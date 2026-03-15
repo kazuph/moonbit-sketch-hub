@@ -1,8 +1,25 @@
 import esbuild from "esbuild";
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 fs.rmSync("./dist", { recursive: true, force: true });
 fs.mkdirSync("./dist/moonpad", { recursive: true });
+
+// Generate FFI_MBT from p5.mbt's browser runtime (single source of truth)
+const browserMbtPath = path.resolve(__dirname, "../p5.mbt/runtime/browser.mbt");
+if (!fs.existsSync(browserMbtPath)) {
+  console.error("ERROR: p5.mbt browser runtime not found at", browserMbtPath);
+  console.error("Make sure the p5.mbt repo is checked out alongside this project.");
+  process.exit(1);
+}
+const ffiContent = fs.readFileSync(browserMbtPath, "utf8");
+fs.writeFileSync(
+  path.resolve(__dirname, "./src/_ffi_generated.js"),
+  `// AUTO-GENERATED — do not edit. Source: p5.mbt/runtime/browser.mbt\nexport const FFI_MBT = ${JSON.stringify(ffiContent)};\n`
+);
 
 esbuild.buildSync({
   entryPoints: [
