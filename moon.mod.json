@@ -1,0 +1,10 @@
+{
+  "name": "kazuph/sketchhub",
+  "version": "0.1.0",
+  "readme": "README.mbt.md",
+  "repository": "https://github.com/kazuph/moonbit-sketch-hub",
+  "license": "Apache-2.0",
+  "keywords": ["creative-coding", "p5", "sketch"],
+  "description": "Creative coding works gallery built with MoonBit",
+  "preferred-target": "js"
+}

@@ -1,0 +1,13 @@
+import {
+  "kazuph/sketchhub",
+}
+
+options(
+  "is-main": true,
+  link: {
+    "js": {
+      "exports": ["main"],
+      "format": "esm",
+    },
+  },
+)
